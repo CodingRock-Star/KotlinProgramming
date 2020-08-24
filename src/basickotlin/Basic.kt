@@ -10,7 +10,7 @@ fun weather(degree: Int): String {
 }
 
 
-fun main(args: Array<String>) {
+fun main() {
     val s = weather(26)
     println("Hello World!!!")
     println("Weather :$s")
@@ -90,5 +90,16 @@ fun main(args: Array<String>) {
     val today = if (date == 2010) true else false
     println("The Result of if..else expression $today")
 
+    //function invokation
+    println("The Message 1 ${display(6, 7)},The Message ${display1(8,6)} ")
 
+}
+
+fun display(a: Int, b: Int): Int = if (a > b) a else b
+
+fun display1(a: Int, b: Int): Int {
+    if (a > b) {
+        return a
+    } else
+        return b
 }
