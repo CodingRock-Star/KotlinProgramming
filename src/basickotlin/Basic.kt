@@ -83,4 +83,12 @@ fun main(args: Array<String>) {
 
     /****************************************************************************************************************************************/
 
+
+    //if ..else and try ..catch blocks are expression
+
+    var date = 2010
+    val today = if (date == 2010) true else false
+    println("The Result of if..else expression $today")
+
+
 }
