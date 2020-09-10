@@ -1,5 +1,7 @@
 package basickotlin
 
+import java.lang.IllegalArgumentException
+
 fun weather(degree: Int): String {
     val (description, color) = when {
         degree < 10 -> "cold" to "Blue"
@@ -57,6 +59,8 @@ fun main() {
             println("The Value of Int ${i * j}")
         }
     }
+
+    println("Kotlin" in "java".."Scala")
     /**
      *  For example, in the standard String class, Kotlin provides an
      *  iterator extension function that adheres to the required contract and so
@@ -91,7 +95,57 @@ fun main() {
     println("The Result of if..else expression $today")
 
     //function invokation
-    println("The Message 1 ${display(6, 7)},The Message ${display1(8,6)} ")
+    println("The Message 1 ${display(6, 7)},The Message ${display1(8, 6)} ")
+
+    //When expression
+    //1-With the args and without args
+
+    whatNumber1(3)
+    println("The value of When is returned as ${whatNumber2(3)}")
+
+    println("The Number is Returned without Args:${whatNumber4(5, 3)}")
+
+    //Exception
+
+        print("The CheckException is Thrown ${checkException(101)}")
+
+
+}
+@Throws(IllegalArgumentException::class)
+fun checkException(i: Int): Int {
+     if (i in 1..100)
+        return i
+    else
+        throw IllegalArgumentException("Throw Illegal Arugment Exception+$i")
+
+}
+
+fun whatNumber4(x: Int, y: Int): String {
+    return when {
+        x < y -> ("Y is greater")
+        x > y -> ("X is greater")
+        else -> ("X==Y")
+    }
+
+}
+
+fun whatNumber1(x: Int) {
+    when (x) {
+        0 -> println("x is zero")
+        1 -> println("x is one ")
+        2 -> println("x is two")
+        else -> println("Nothing")
+    }
+
+}
+
+fun whatNumber2(x: Int): String {
+    return when (x) {
+        0 -> ("x is zero")
+        1 -> ("x is one ")
+        2 -> ("x is two")
+        else -> ("Nothing")
+    }
 
 }
 
