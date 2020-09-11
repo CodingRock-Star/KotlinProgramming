@@ -1,5 +1,6 @@
 package kotlinoops
 
+import java.io.OutputStream
 import java.math.BigDecimal
 
 open class Payment(val amount: Int){
@@ -53,4 +54,25 @@ class AmphibiuosCar(val name:String): Any(),Drivable,Sailable{
     override fun equals(other: Any?): Boolean {
         return super.equals(other)
     }
+}
+
+open class Image{
+    open fun save(output:String){
+        println("logic for saving the image")
+    }
+}
+
+
+interface VendorImage {
+    fun save(output:String){
+        println("Vendor logic for saving the method $output")
+    }
+}
+
+class ImageEvalution: Image(),VendorImage{
+    override fun save(output: String) {
+        println("Image Evalution  $output")
+        super<VendorImage>.save(output)
+    }
+
 }

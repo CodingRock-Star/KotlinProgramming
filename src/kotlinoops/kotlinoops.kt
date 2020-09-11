@@ -1,5 +1,8 @@
 package kotlinoops
 
+import java.io.File
+import java.io.OutputStream
+
 
 fun main() {
 
@@ -40,17 +43,41 @@ fun main() {
     sailable.drive()
 
     //open class demo ...
-    val derivedContainer= DerivedContainer()
+    val derivedContainer = DerivedContainer()
     println("The default amount is ${derivedContainer.defaultValue()}")
     println("The new amount is ${derivedContainer.getNewAmount()}")
 
 
     //default interface implementation
 
-    val evilKotlinMaster=EvilKotlinMaster("Dhiraj is Evil")
+    val evilKotlinMaster = EvilKotlinMaster("Dhiraj is Evil")
     evilKotlinMaster.sayHello()
     evilKotlinMaster.startGame()
+
+    //abstract implementation.
+
+    val childOfParent = ChildOfParent()
+    println("The value of ${childOfParent.getValue()}")
+
+    //open class can be used to create a instance also...
+    val openClass = AParrent();
+    println("The value of ${openClass.getValue()}")
+
+    val t = Thread(Runnable { println("I am the demo thead") })
+    t.start()
+
+    //overridding rules...
+
+    val imageEvalution=ImageEvalution();
+    imageEvalution.save("Hi")
+
+    //class delegattion
+
+    val panel =Panel(Rectangle(4,5,6))
+    println("Tha panel Height ${panel.getHeight()}")
+    println("Tha panel Weight ${panel.getWeight()}")
 }
+
 //Interface demos.....
 interface Document {
     val version: Long
@@ -68,7 +95,7 @@ interface Document {
 
 }
 
-class DocumentImpl:Document{
+class DocumentImpl : Document {
     override val version: Long
         get() = 0
     override val size: Long
@@ -85,22 +112,23 @@ class DocumentImpl:Document{
 
 }
 
-open class  Container() {
-    protected open val feild:String="I am open"
-    protected var amount:Int=1
+open class Container() {
+    protected open val feild: String = "I am open"
+    protected var amount: Int = 1
+
     init {
-        this.amount=amount
+        this.amount = amount
     }
 
-    open fun defaultValue():Int{
+    open fun defaultValue(): Int {
         return amount
     }
 
 }
 
-class DerivedContainer:Container(){
-     fun getNewAmount():Int{
-        return amount*10
+class DerivedContainer : Container() {
+    fun getNewAmount(): Int {
+        return amount * 10
     }
 
     override fun defaultValue(): Int {
