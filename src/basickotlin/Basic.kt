@@ -1,6 +1,8 @@
+@file:JvmMultifileClass
 package basickotlin
 
 import java.lang.IllegalArgumentException
+import java.util.concurrent.atomic.AtomicInteger
 
 fun weather(degree: Int): String {
     val (description, color) = when {
@@ -10,7 +12,6 @@ fun weather(degree: Int): String {
     }
     return description;
 }
-
 
 fun main() {
     val s = weather(26)
@@ -156,4 +157,11 @@ fun display1(a: Int, b: Int): Int {
         return a
     } else
         return b
+}
+object SingletonExample{
+    init {
+        println("I will be initilized once...")
+    }
+    private val counter= AtomicInteger(4)
+    fun increment()= counter.getAndIncrement()
 }

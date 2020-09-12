@@ -1,7 +1,12 @@
 package kotlinoops
 
+import jdk.nashorn.internal.ir.RuntimeNode
 import java.io.File
 import java.io.OutputStream
+import java.util.concurrent.Callable
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+import java.util.concurrent.atomic.AtomicInteger
 
 
 fun main() {
@@ -68,16 +73,59 @@ fun main() {
 
     //overridding rules...
 
-    val imageEvalution=ImageEvalution();
+    val imageEvalution = ImageEvalution();
     imageEvalution.save("Hi")
 
     //class delegattion
 
-    val panel =Panel(Rectangle(4,5,6))
+    val panel = Panel(Rectangle(4, 5, 6))
     println("Tha panel Height ${panel.getHeight()}")
     println("Tha panel Weight ${panel.getWeight()}")
+
+    //function extension
+
+    val s = Submarine()
+    s.fire();
+    s.submerge()
+    s.submerged(10)
+
+    //member extension function..
+    val ext = Mappings()
+    ext.add("Dhiraj")
+
+    //operators
+    val ints = arrayOf(1, 2, 3, 4)
+    val a = 3 in ints
+    println("The value of val is $a")
+    println("The Multple arguments ${multiprint("a", "b", "d")}")
+
+    //More extension functions
+
+    val extension = Extension()
+    val task = Runnable { extension.lazyDemo() }
+    Thread(task).start()
+
+    extension.lazyDemo()
+    // extension.useDemo()
+    extension.repeatDemo()
+
+    val service =Executors.newSingleThreadExecutor()
+    service.submit({extension.applyDemo()})
 }
 
+fun multiprint(vararg strings: String): Unit {
+    for (string in strings)
+        println(string)
+}
+
+object SingletonExample{
+    init {
+        println("I will be initilized once...")
+    }
+    private val counter= AtomicInteger(4)
+    @JvmStatic
+    fun increment()= counter.getAndIncrement()
+}
 //Interface demos.....
 interface Document {
     val version: Long
