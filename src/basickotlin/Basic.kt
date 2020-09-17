@@ -108,7 +108,7 @@ fun main() {
 
     //Exception
 
-        print("The CheckException is Thrown ${checkException(101)}")
+       // print("The CheckException is Thrown ${checkException(101)}")
 
 
 }

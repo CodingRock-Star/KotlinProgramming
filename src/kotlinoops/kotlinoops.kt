@@ -109,8 +109,109 @@ fun main() {
     // extension.useDemo()
     extension.repeatDemo()
 
-    val service =Executors.newSingleThreadExecutor()
-    service.submit({extension.applyDemo()})
+    val service = Executors.newSingleThreadExecutor()
+    service.submit({ extension.applyDemo() })
+
+    //properties
+
+    val student = Student("DHIRAJ", 20)
+    println("The student age student ${student.age1}")
+    student.name1 = "Anumeha"
+    println("The student name name :student ${student.name1}")
+
+    //properties 1
+    val rectangle = Rectange(3.0, 4.0)
+    println("The property feild is defined ${rectangle.isSquare}")
+
+    //properties 2
+    val counter = LengthCounter()
+    counter.counter = 3
+    counter.addWord("dHIRAJ")
+    println("The property feild of couunter ${counter.counter}")
+
+    //properties 2
+
+    val faceBookUser = FaceBookUser(12343)
+    println("My Facebook is activated ${faceBookUser.userName}")
+
+    //late initialization
+    val myClass = MyClass()
+    myClass.initilizationLogic()
+
+    //lazy property
+    val myLazyClass = WithLazyProperty()
+    println(myLazyClass.foo + myLazyClass.foo)
+
+    //Null demos
+    val demoNull = NullDemo()
+    println("The demos of null ?${demoNull.demoNull()} ")
+
+    //Smart Cast
+
+    val country = Country("Germany")
+    val city = City("Berlin", country)
+    val address = Address("kerpen West", "345343", city)
+
+    val person2: Person2? = Person2("Dhiraj", address)
+    //Force Operator
+    //Sometimes we might decide that we want to dispense with the compiler's checks and force
+    //a nullable type into a non-nullable type. This is useful in situations were we are dealing
+    //with Java code, which we know is never null, and we need to use a variable with a function
+    //that only accepts non-nullable values. To do this, we can use the !! operator:
+    println("The country Name of Dhiraj ${person2!!.getCountryName(person2)}")
+
+    //safe null check...
+
+    val person3: Person2? = Person2("Anumeha", address)
+    //Safe null does not need (((!!)==>Force Operator
+    println("The country Name of anumeha ${person2.getCountryNameWithSafeNullCheck(person3)}")
+
+    //Force Operator
+    val nullableName: String? = "Dhiraj"
+    val name: String = nullableName!!
+    println("The Force Operator${forceOperatorDemo(name)}")
+
+    //Elivas opertator
+    //  This infix operator can be placed in between a nullable expression and an expression to use
+    //        if the nullable expression is indeed null. So the general usage resembles the following:
+    val nullableName1: String? = "Dhiraj"
+    val name1: String = nullableName1 ?: "default_name"
+
+    println("The Elivas Operator$name1")
+
+    //Safe Casting...
+    //In the following example, we will cast a parameter that we know is a String, but the
+    //compiler doesn't know it is a String as we declared it as an Any:
+    val location: Any = "London"
+    val safeString: String? = location as? String
+    val safeInt: Int? = location as? Int
+
+    //Annotations :
+
+    //JVM Name
+    val AnnotationDemo = AnnotationDemo();
+
+    AnnotationDemo.filter(listOf("dhira", "anu"))
+    AnnotationDemo.filter(listOf(2, 3, 4, 4))
+
+    //JVM Static
+
+    //The @JvmStatic annotation informs the compiler that you wish the function or property
+    //annotated to have a Java static method generated in the compiled output. This annotation
+    //can only be used on objects or companion objects.
+    //By default an object or companion object is compiled into a class that has a single instance.
+    //This instance is then stored in a static field named INSTANCE. To access functions on these
+    //objects in Java, you are required to first resolve the singleton. For example:
+    // HasStaticFuncs.INSTANCE.foo();
+    //However, the annotation will result in the function being a static method rather than an
+    //instance method, so we can invoke it directly on the type:
+    // HasStaticFuncs.foo();
+
+
+}
+
+fun forceOperatorDemo(value: String?): String? {
+    return value
 }
 
 fun multiprint(vararg strings: String): Unit {
@@ -118,14 +219,16 @@ fun multiprint(vararg strings: String): Unit {
         println(string)
 }
 
-object SingletonExample{
+object SingletonExample {
     init {
         println("I will be initilized once...")
     }
-    private val counter= AtomicInteger(4)
+
+    private val counter = AtomicInteger(4)
     @JvmStatic
-    fun increment()= counter.getAndIncrement()
+    fun increment() = counter.getAndIncrement()
 }
+
 //Interface demos.....
 interface Document {
     val version: Long
