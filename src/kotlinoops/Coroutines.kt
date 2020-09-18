@@ -1,8 +1,14 @@
 package kotlinoops
 
-import jdk.nashorn.internal.objects.Global
-import kotlinx.coroutines.*
 
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+
+//Provide an aysnc mech.
+//Light Weight Thread.
+//When u launch a coroutines they are schedules on a thread.
 
 fun main() {
     //non-blocking delay
@@ -11,12 +17,34 @@ fun main() {
     multipleCoroutines()
     //waiting for a job
     waitingForAJobToFinish()
+    runBlockingExample()
+
+    var s:Int=runBlockingExample2(5)
+
+}
+
+fun runBlockingExample2( s :Int ):Int = runBlocking {
+    var s1:Int=0
+      s1=printTheVaalue(s)
+    return@runBlocking s1
+}
+
+  fun printTheVaalue(s: Int):Int{
+   return s*s
+}
+
+fun runBlockingExample() = runBlocking {
+    launch {
+        println("The Loop is printing....")
+        printLoop() }
+    delay(2000)
+    println("The Loop is printed.!!!")
 
 }
 
 fun waitingForAJobToFinish() {
     runBlocking {
-        val job = GlobalScope.launch {
+        val job = launch {
             printLoop()
             delay(2000)
         }
